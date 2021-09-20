@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Transport
+namespace TransportNameSpace
 {
     public abstract class Transport
     {
