@@ -12,8 +12,8 @@ namespace TransportDriver
             var trainA = new Train("A", 80);
             trainA.IncreaseSpeed(1); // no event
             trainA.IncreaseSpeed(4); // raise event
-                                     //Console.WriteLine(trainA.ToString()+"\n");
-
+                                     //Console.WriteLine(trainA.ToString()+"\n"); 
+                                      
             Console.WriteLine();
 
             var bussB = new Buss("B", 50);
