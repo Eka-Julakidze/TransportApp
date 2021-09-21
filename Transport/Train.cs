@@ -12,6 +12,13 @@ namespace TransportNameSpace
             base(name,speed)
         {
             SpeedLimitReached += _OnSpeedLimitReached;
+
+            if(this.Speed > 250)
+            {
+                Console.WriteLine($"Train Name: {this.TransportName}, Train Speed: {this.Speed}. Already has high speed...");
+                _OnSpeedLimitReached(this, new SpeedEventArgs { N = this.TransportName, S = this.Speed });
+                Console.WriteLine();
+            }
         }
 
         public override double IncreaseSpeed(double now)
@@ -21,15 +28,16 @@ namespace TransportNameSpace
             Speed *= now;
             if (this.Speed > 250)
             {
-                _OnSpeedLimitReached(this.TransportName,this.Speed);
+                _OnSpeedLimitReached(this, new SpeedEventArgs {N=this.TransportName, S=this.Speed});
             }
 
             return Speed;
         }
 
-        protected void _OnSpeedLimitReached(object source, SpeedEventArgs e)
+        protected override void _OnSpeedLimitReached(object source, SpeedEventArgs e)
         {
-            Console.WriteLine("The Train '{0}' is crashed since the speed was: {1}".ToUpper(), e.N, e.S);
+            NumberOfTransportCrash++;
+            Console.WriteLine("{0}. The Train '{1}' is crashed since the speed was: {2}".ToUpper(), NumberOfTransportCrash, e.N, e.S);
         }
 
 

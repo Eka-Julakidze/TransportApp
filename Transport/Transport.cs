@@ -4,6 +4,7 @@ namespace TransportNameSpace
 {
     public abstract class Transport
     {
+        public static int NumberOfTransportCrash { get; set; }
         public string TransportName { get; set; }
         public double Speed { get; set; }
 
@@ -17,14 +18,8 @@ namespace TransportNameSpace
 
         public abstract double IncreaseSpeed(double now);
 
-        protected virtual void _OnSpeedLimitReached(string name, double speed)
-        {
-            if (SpeedLimitReached != null)
-            {
-                SpeedLimitReached(this, new SpeedEventArgs { S = speed, N = name});
-            }
-        }
-
+        protected abstract void _OnSpeedLimitReached(object source, SpeedEventArgs e);
+       
         public override string ToString()
         {
             return $"This is: {this.TransportName}, The Speed is: {this.Speed}";
