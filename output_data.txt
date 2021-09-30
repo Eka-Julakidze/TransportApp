@@ -1,11 +1,5 @@
-### OUTPUT DATA FOR ALL TRANSPORT ###
 Train Name: Tbilisi_Kutaisi, Speed: 260
 Buss Name: Tbilisi_Batumi, Speed: 200
 Train Name: Kutaisi_Batumi, Speed: 300
-Train Name: Batumi_Poti, Speed: 100
-Buss Name: Yellow, Speed: 60
 Buss Name: Red, Speed: 85
 Train Name: Grey_Train, Speed: 280
-Train Name: White_Train, Speed: 90
-Buss Name: White_Buss, Speed: 30
-Buss Name: Blue_Buss, Speed: 50
