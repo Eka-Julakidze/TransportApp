@@ -8,8 +8,8 @@ namespace TransportNameSpace
 {
     public class Buss: Transport
     {
-        public Buss(string name, double speed)
-            :base(name,speed)
+        public Buss(char transportType, string name, double speed)
+            :base(transportType,name,speed)
         {
             SpeedLimitReached += _OnSpeedLimitReached;
 

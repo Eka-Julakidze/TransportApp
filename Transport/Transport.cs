@@ -5,11 +5,13 @@ namespace TransportNameSpace
     public abstract class Transport
     {
         public static int NumberOfTransportCrash { get; set; }
+        public char TransportType { get; set; }
         public string TransportName { get; set; }
         public double Speed { get; set; }
 
-        public Transport(string name, double speed)
+        public Transport(char transportType, string name, double speed)
         {
+            TransportType = transportType;
             TransportName = name;
             Speed = speed;
         }
@@ -20,15 +22,14 @@ namespace TransportNameSpace
 
         protected abstract void _OnSpeedLimitReached(object source, SpeedEventArgs e);
        
-        public override string ToString()
+        public bool HasGreaterOrEqualSpeed(Transport other)
         {
-            return $"This is: {this.TransportName}, The Speed is: {this.Speed}";
+            return this.Speed >= other.Speed ? true : false;
         }
 
-
-
-
-
-
+        public override string ToString()
+        {
+            return $"Name: {this.TransportName}, Speed: {this.Speed}";
+        }
     }
 }

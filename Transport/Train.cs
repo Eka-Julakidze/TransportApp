@@ -8,8 +8,8 @@ namespace TransportNameSpace
 {
    public class Train : Transport
     {
-        public Train(string name, double speed):
-            base(name,speed)
+        public Train(char transportType, string name, double speed):
+            base(transportType,name,speed)
         {
             SpeedLimitReached += _OnSpeedLimitReached;
 
@@ -42,4 +42,6 @@ namespace TransportNameSpace
 
 
     }
+
+     
 }

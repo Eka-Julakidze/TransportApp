@@ -1,0 +1,10 @@
+T,Tbilisi_Kutaisi,260
+B,Tbilisi_Batumi,200
+T,Kutaisi_Batumi,300
+T,Batumi_Poti,100
+B,Yellow,60
+B,Red,85
+T,Grey_Train,280
+T,White_Train,90
+B,White_Buss,30
+B,Blue_Buss,50

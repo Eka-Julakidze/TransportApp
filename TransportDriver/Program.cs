@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TransportNameSpace;
 using static TransportNameSpace.Transport;
+using System.IO;
 
 namespace TransportDriver
 {
@@ -10,39 +11,62 @@ namespace TransportDriver
     class Program
     {
         static void Main(string[] args)
-        {           
-            var vehicles = new List<Transport>
+        {
+            List<Transport> vehicles = new List<Transport>();
+            string inputPath = @"C:\Users\ejulakidze\source\repos\TransportApp\input_data.csv.txt";
+            string outputPath = @"C:\Users\ejulakidze\source\repos\TransportApp\output_data.txt";
+            //char transportType;
+            string name;
+            double speed;
+
+            try
             {
-                new Train("Tblisi", 120),
-                new Train("abc", 60),
-                new Buss("yellow", 85),
-                new Buss("blue", 20),
-                new Buss("Brown", 30),
-                new Train("Xar", 50),
-                new Buss("Old_Buss", 25),
-                new Train("RedTrain", 300),
-                new Train("YellowTrain", 250),
-                new Buss("Red Buss", 45),
+                using (StreamReader reader = File.OpenText(inputPath))
+                {
+                    string s;
+                    while ((s = reader.ReadLine()) != null)
+                    {
+                        name = s.Substring(2, s.LastIndexOf(',')-2);
+                        speed = Convert.ToDouble(s.Substring(s.LastIndexOf(',') + 1));
+                        if (s[0] == 'T')
+                        {
+                            vehicles.Add(new Train(s[0], name, speed));
+                        }
+                        else
+                        {
+                            vehicles.Add(new Buss(s[0], name, speed));
+                        }
+                    }
+                }
 
-               
-            };
+                using (StreamWriter writer = File.CreateText(outputPath))
+                {
+                    writer.WriteLine("### OUTPUT DATA FOR ALL TRANSPORT ###");
+                    foreach (var v in vehicles)
+                    {
+                        writer.Write(v.GetType().Name + " ");
+                        writer.WriteLine(v.ToString());
+                    }                  
+                }
 
-            var rand = new Random();
-            int incr; // increases speed
-            Console.WriteLine("\nThe Collection of Vehicles-----------------------------\n".ToUpper());
-
-            // randomly increase speed of each vehicle and then print the info
-            foreach (var vehicle in vehicles)
-            {
-                Console.WriteLine($"INFO --> {vehicle.GetType().Name.ToUpper()}: {vehicle.ToString()}");
-                
-                incr = rand.Next(20);                                
-                vehicle.IncreaseSpeed(incr);
-                Console.WriteLine($"P.S. the speed after increase is: {vehicle.Speed}");
-                Console.WriteLine($"Number of Crashed Vehicles: {NumberOfTransportCrash}");
-
-                Console.WriteLine("---------------------------------------");
+                using(StreamReader reader = File.OpenText(outputPath))
+                {
+                    Console.WriteLine("\n### READING OUTPUT DATA FOR ALL TRANSPORT ###");
+                    Console.WriteLine(reader.ReadToEnd().ToString());
+                }               
             }
+            catch (IOException e)
+            {
+                Console.WriteLine("Error reading the file");
+                Console.WriteLine(e.Message);
+            }
+
+           
+
+           
+
         }
     }
 }
+
+
